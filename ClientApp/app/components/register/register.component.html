@@ -1,0 +1,38 @@
+﻿<div>
+  <h1>
+    Register with
+  </h1>
+  <div class="list-group">
+    <a href="#" class="list-group-item list-group-item-action">Facebook</a>
+    <a href="#" class="list-group-item list-group-item-action">Google+</a>
+    <a href="#" class="list-group-item list-group-item-action">Amazon</a>
+  </div>
+</div>
+<hr />
+<div>
+  <h1>
+    Register
+  </h1>
+  <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+    <div class="form-group">
+      <input type="text" class="form-control" name="username" placeholder="Username" ngModel required />
+      <input type="text" class="form-control" name="email" placeholder="Email" ngModel required />
+      <input type="password" class="form-control" name="password" placeholder="Password" ngModel required />
+      <input type="password" class="form-control" name="retype-password" placeholder="Retype Password" ngModel required />
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+</div>
+<hr />
+<div>
+  <h1>
+    Login
+  </h1>
+  <form>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Username" />
+      <input type="password" class="form-control" placeholder="Password" />
+    </div>
+    <button type="submit" class="btn btn-primary">Log In</button>
+  </form>
+</div>
