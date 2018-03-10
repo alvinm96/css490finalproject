@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
     selector: 'nav-menu',
@@ -6,4 +8,10 @@ import { Component } from '@angular/core';
     styleUrls: ['./navmenu.component.css']
 })
 export class NavMenuComponent {
+  modalRef: BsModalRef;
+  constructor(private modalService: BsModalService) { }
+
+  openModal(template: any) {
+    this.modalRef = this.modalService.show(template);
+  }
 }

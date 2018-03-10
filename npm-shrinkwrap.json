@@ -3424,6 +3424,11 @@
       "resolved": "https://registry.npmjs.org/ngx-bootstrap/-/ngx-bootstrap-2.0.2.tgz",
       "integrity": "sha512-4ZTltcStUED2JzI9Hd1+FDaMQmukzbeBSS02hdTvuUJ+9hNtGLMSPGdPNRIniIyItzv3v3emJrAAtKkvOMxyCA=="
     },
+    "ngx-webstorage": {
+      "version": "2.0.1",
+      "resolved": "https://registry.npmjs.org/ngx-webstorage/-/ngx-webstorage-2.0.1.tgz",
+      "integrity": "sha512-AhBkl1v5sBLYiGC1DuHxM90B8OewqyhYhm+KGtJIFxMh5dj3tlNgPokmWCtKcUZF26m8MgxDDuP5e6NeDCpYQw=="
+    },
     "no-case": {
       "version": "2.3.1",
       "resolved": "https://registry.npmjs.org/no-case/-/no-case-2.3.1.tgz",

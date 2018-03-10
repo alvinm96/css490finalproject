@@ -18,7 +18,7 @@ export class RegisterComponent {
       username: form.value.username,
       email: form.value.email,
       password: form.value.password
-    };
+    };``
 
     this.http.post('/api/Register', opts)
       .toPromise()

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
@@ -31,7 +32,8 @@ import { CodeVerificationComponent } from './components/code-verification/code-v
       { path: 'callback', component: CallbackComponent },
       { path: 'code-verification', component: CodeVerificationComponent },
       { path: '**', redirectTo: 'home' }
-    ])
+    ]),
+    ModalModule.forRoot()
   ]
 })
 export class AppModuleShared {
