@@ -7,11 +7,9 @@ import { Router } from '@angular/router';
 })
 
 export class CallbackComponent implements OnInit {
+  codeVerification = 'http://localhost:64838/code-verification';
+
   constructor(private router: Router) { }
 
-  ngOnInit() {
-    setTimeout(() => {
-      this.router.navigateByUrl("/");
-    }, 5000);
-  }
+  ngOnInit() { }
 }

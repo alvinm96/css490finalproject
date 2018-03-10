@@ -21,7 +21,9 @@ export class CodeVerificationComponent {
     this.http.post('/api/Verify', opts)
       .toPromise()
       .then((res) => {
-        this.router.navigateByUrl("/");
+        this.router.navigateByUrl("/").then((res) => {
+          alert('You can now log in!');
+        });
       })
       .catch((err) => {
          alert('Error in verifying code')

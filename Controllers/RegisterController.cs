@@ -29,16 +29,18 @@ namespace FinalProject.Controllers
     }
 
     [HttpPost]
-    public async Task Register([FromBody] UserIdentity body)
+    public async Task<JsonResult> Register([FromBody] UserIdentity body)
     {
       using (var provider = new Amazon.CognitoIdentityProvider.AmazonCognitoIdentityProviderClient(RegionEndpoint.USWest2))
       {
-        var signup = await provider.SignUpAsync(new SignUpRequest
+        try
         {
-          ClientId = AWSConfig.Client_ID,
-          Username = body.Username,
-          Password = body.Password,
-          UserAttributes = new List<Amazon.CognitoIdentityProvider.Model.AttributeType>
+          var signup = await provider.SignUpAsync(new SignUpRequest
+          {
+            ClientId = AWSConfig.Client_ID,
+            Username = body.Username,
+            Password = body.Password,
+            UserAttributes = new List<Amazon.CognitoIdentityProvider.Model.AttributeType>
           {
             new AttributeType
             {
@@ -46,7 +48,17 @@ namespace FinalProject.Controllers
               Value = body.Email
             }
           }
-        });
+          });
+
+          return new JsonResult(new { response = signup.CodeDeliveryDetails.ToString() });
+        }
+        catch (Exception e)
+        {
+          return new JsonResult(new { response = e.Message })
+          {
+            StatusCode = 400
+          };
+        }
       }
     }
   }
@@ -63,19 +75,31 @@ namespace FinalProject.Controllers
     }
 
     [HttpPost]
-    public async Task Login([FromBody] UserIdentity body)
+    public async Task<JsonResult> Login([FromBody] UserIdentity body)
     {
-      AdminInitiateAuthRequest authReq = new AdminInitiateAuthRequest()
+      try
       {
-        UserPoolId = AWSConfig.Userpool_ID,
-        ClientId = AWSConfig.Client_ID,
-        AuthFlow = AuthFlowType.ADMIN_NO_SRP_AUTH
-      };
+        AdminInitiateAuthRequest authReq = new AdminInitiateAuthRequest()
+        {
+          UserPoolId = AWSConfig.Userpool_ID,
+          ClientId = AWSConfig.Client_ID,
+          AuthFlow = AuthFlowType.ADMIN_NO_SRP_AUTH
+        };
 
-      authReq.AuthParameters.Add("USERNAME", body.Username);
-      authReq.AuthParameters.Add("PASSWORD", body.Password);
+        authReq.AuthParameters.Add("USERNAME", body.Username);
+        authReq.AuthParameters.Add("PASSWORD", body.Password);
 
-      AdminInitiateAuthResponse authResp = await _client.AdminInitiateAuthAsync(authReq);
+        AdminInitiateAuthResponse authResp = await _client.AdminInitiateAuthAsync(authReq);
+
+        return new JsonResult(new { response = authResp });    
+      }
+      catch (Exception e)
+      {
+        return new JsonResult(new { response = e.Message })
+        {
+          StatusCode = 400
+        };
+      }
     }
   }
 
@@ -91,17 +115,29 @@ namespace FinalProject.Controllers
     }
 
     [HttpPost]
-    public async Task Verify([FromBody] UserIdentity body)
+    public async Task<JsonResult> Verify([FromBody] UserIdentity body)
     {
-      Amazon.CognitoIdentityProvider.Model.ConfirmSignUpRequest confirmReq = 
-        new ConfirmSignUpRequest()
+      try
       {
-        Username = body.Username,
-        ClientId = AWSConfig.Client_ID,
-        ConfirmationCode = body.Code
-      };
+        Amazon.CognitoIdentityProvider.Model.ConfirmSignUpRequest confirmReq =
+          new ConfirmSignUpRequest()
+          {
+            Username = body.Username,
+            ClientId = AWSConfig.Client_ID,
+            ConfirmationCode = body.Code
+          };
 
-      var result = await _client.ConfirmSignUpAsync(confirmReq);
+        var result = await _client.ConfirmSignUpAsync(confirmReq);
+
+        return new JsonResult(new { response = result.ToString() });
+      }
+      catch (Exception e)
+      {
+        return new JsonResult(new { response = e.Message })
+        {
+          StatusCode = 400
+        };
+      }
     }
   }
 
