@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CallbackComponent } from './components/callback/callback.component';
 import { CodeVerificationComponent } from './components/code-verification/code-verification.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CodeVerificationComponent } from './components/code-verification/code-v
     HomeComponent,
     RegisterComponent,
     CallbackComponent,
-    CodeVerificationComponent
+    CodeVerificationComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +33,7 @@ import { CodeVerificationComponent } from './components/code-verification/code-v
       { path: 'register', component: RegisterComponent },
       { path: 'callback', component: CallbackComponent },
       { path: 'code-verification', component: CodeVerificationComponent },
+      { path: 'u/:userId', component: UserComponent },
       { path: '**', redirectTo: 'home' }
     ]),
     ModalModule.forRoot()

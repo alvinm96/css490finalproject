@@ -8,7 +8,11 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
     styleUrls: ['./navmenu.component.css']
 })
 export class NavMenuComponent {
+  isLoggedIn: boolean = true;
+  name: string = 'Alvin';
   modalRef: BsModalRef;
+  userPage: string = "/u/alvinm96";
+
   constructor(private modalService: BsModalService) { }
 
   openModal(template: any) {

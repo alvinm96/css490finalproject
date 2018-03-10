@@ -8,15 +8,30 @@
     </button>
     <a class='navbar-brand' [routerLink]="['/home']">FinalProject</a>
   </div>
+
   <div class='navbar-collapse collapse'>
-    <ul class="nav navbar-nav navbar-left">
+
+    <ul class="nav navbar-nav navbar-left" *ngIf="isLoggedIn">
       <li><button class="btn btn-group-lg btn-success" (click)="openModal(template)">Upload</button></li>
     </ul>
 
 
-    <ul class='nav navbar-nav navbar-right'>
-      <li [routerLinkActive]="['link-active']">
+    <ul class='nav navbar-nav navbar-right' *ngIf="isLoggedIn">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello {{name}}! <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Your Images</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#">Your Groups</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a routerLink="/u/alvinm96">Your Account</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#">Sign Out</a></li>
+        </ul>
       </li>
+    </ul>
+
+    <ul class='nav navbar-nav navbar-right' *ngIf="!isLoggedIn">
       <li [routerLinkActive]="['link-active']">
         <a [routerLink]="['/register']">
           <span class='glyphicon glyphicon-education'></span> Register / Login
