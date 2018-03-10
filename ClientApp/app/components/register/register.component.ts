@@ -26,7 +26,23 @@ export class RegisterComponent {
         this.router.navigateByUrl('/callback');
       })
       .catch((err) => {
-        alert("Could not register");
+        alert('Could not register');
+      });
+  }
+
+  login(form: any) {
+    var opts = {
+      username: form.value.username,
+      password: form.value.password
+    };
+
+    this.http.post('/api/Login', opts)
+      .toPromise()
+      .then((res) => {
+        alert("Logged In");
+      })
+      .catch((err) => {
+        alert('Could not login');
       });
   }
 }

@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CallbackComponent } from './components/callback/callback.component';
+import { CodeVerificationComponent } from './components/code-verification/code-verification.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CallbackComponent } from './components/callback/callback.component';
     FetchDataComponent,
     HomeComponent,
     RegisterComponent,
-    CallbackComponent
+    CallbackComponent,
+    CodeVerificationComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ import { CallbackComponent } from './components/callback/callback.component';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'callback', component: CallbackComponent },
+      { path: 'code-verification', component: CodeVerificationComponent },
       { path: '**', redirectTo: 'home' }
     ])
   ]

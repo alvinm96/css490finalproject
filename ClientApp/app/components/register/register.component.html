@@ -28,10 +28,10 @@
   <h1>
     Login
   </h1>
-  <form>
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Username" />
-      <input type="password" class="form-control" placeholder="Password" />
+      <input type="text" class="form-control" name="username" placeholder="Username" ngModel required />
+      <input type="password" class="form-control" name="password" placeholder="Password" ngModel required />
     </div>
     <button type="submit" class="btn btn-primary">Log In</button>
   </form>

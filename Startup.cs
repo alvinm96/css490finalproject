@@ -13,6 +13,7 @@ namespace FinalProject
     public class AWSConfig
     {
         public string Client_ID { get; set; }
+        public string Userpool_ID { get; set; }
     }
     
     public class Startup
