@@ -8,7 +8,6 @@ import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CallbackComponent } from './components/callback/callback.component';
 import { CodeVerificationComponent } from './components/code-verification/code-verification.component';
 
@@ -16,7 +15,6 @@ import { CodeVerificationComponent } from './components/code-verification/code-v
   declarations: [
     AppComponent,
     NavMenuComponent,
-    FetchDataComponent,
     HomeComponent,
     RegisterComponent,
     CallbackComponent,
@@ -29,7 +27,6 @@ import { CodeVerificationComponent } from './components/code-verification/code-v
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'callback', component: CallbackComponent },
       { path: 'code-verification', component: CodeVerificationComponent },
