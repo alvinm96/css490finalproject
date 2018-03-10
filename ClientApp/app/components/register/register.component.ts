@@ -1,6 +1,7 @@
 ﻿import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Http, Headers, Response } from '@angular/http';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
@@ -9,7 +10,8 @@ import 'rxjs/add/operator/toPromise';
 })
 
 export class RegisterComponent {
-  constructor(private http: Http) { }
+  constructor(private http: Http,
+              private router: Router) { }
 
   register(form: any) {
     var opts = {
@@ -18,12 +20,10 @@ export class RegisterComponent {
       password: form.value.password
     };
 
-    console.log(form.value.username);
-
     this.http.post('/api/Register', opts)
       .toPromise()
       .then((res) => {
-        // go to callback url
+        this.router.navigateByUrl('/callback');
       })
       .catch((err) => {
         alert("Could not register");
