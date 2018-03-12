@@ -39,13 +39,13 @@ namespace FinalProject.Controllers
               for (int i = 0; reader.Read(); i++)
               {
                 var name = reader[1];
-                Image image = new Image(
+                ImageDB image = new ImageDB(
                   (int) reader[0],
                   (string) reader[1],
-                  (string) reader[2],
-                  (string) reader[3],
-                  (string) reader[4],
-                  (string) reader[5]
+                  (string)reader[2],
+                  (string)reader[3],
+                  (string)reader[4],
+                  (byte[])reader[5]
                 );
 
                 images.Add(image);

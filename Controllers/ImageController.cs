@@ -10,12 +10,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.Controllers
 {
-    public class ImageController : Controller
+  [Route("api/[controller]")]
+  public class ImageController : Controller
+  {
+    public IActionResult Index()
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+      return View();
+    }
 
     [HttpPost]
     public ActionResult PostImage([FromBody] Image body)
@@ -32,7 +33,7 @@ namespace FinalProject.Controllers
             string groupName = body.GroupName;
             string userName = body.UserName;
             string description = body.Description;
-            object imageUrl = body.ImageObj;
+            byte[] imageUrl = Convert.FromBase64String(body.ImageObj);
 
             command.Connection = connection;
             command.CommandType = System.Data.CommandType.Text;
@@ -101,13 +102,14 @@ namespace FinalProject.Controllers
               for (int i = 0; reader.Read(); i++)
               {
                 var name = reader[1];
-                Image image = new Image(
+
+                ImageDB image = new ImageDB(
                   (int)reader[0],
                   (string)reader[1],
                   (string)reader[2],
                   (string)reader[3],
                   (string)reader[4],
-                  (string)reader[5]
+                  (byte[])reader[5]
                 );
 
                 images.Add(image);

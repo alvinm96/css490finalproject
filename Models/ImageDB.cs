@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Models
 {
-  public class Image
+  public class ImageDB
   {
     public int ImageId { get; set; }
     public string ImageName { get; set; }
     public string GroupName { get; set; }
     public string UserName { get; set; }
     public string Description { get; set; }
-    public string ImageObj { get; set; }
+    public byte[] ImageObj { get; set; }
 
-    public Image(int imageId, string imageName, string groupName, string userName, string description, string image)
+    public ImageDB(int imageId, string imageName, string groupName, string userName, string description, byte[] image)
     {
       ImageId = imageId;
       ImageName = imageName;

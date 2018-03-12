@@ -18,6 +18,7 @@ export class NavMenuComponent {
   userGroups: string;
   file: any;
   isClicked: boolean = false;
+  groups: string[] = [];
 
   constructor(private modalService: BsModalService,
               private sessionSt: SessionStorageService,
@@ -40,30 +41,35 @@ export class NavMenuComponent {
   }
 
   upload(form: any) {
-    console.log(this.file[0]);
+    let reader = new FileReader();
 
-    let body = {
-      imageName: form.value.name,
-      groupName: 'test-group',
-      userName: this.name,
-      description: form.value.description,
-      imageObj: this.file[0] || ''
-    };
+    reader.readAsArrayBuffer(this.file[0]);
 
-    console.log(body);
+    reader.onload = () => {
+      var byteArray = new Uint8Array(reader.result);
 
-    this.isClicked = true;
+      let body = {
+        imageName: form.value.name,
+        groupName: 'test-group',
+        userName: this.name,
+        description: form.value.description,
+        imageObj: btoa(String.fromCharCode.apply(null, byteArray))
+      };
+      console.log(byteArray);
 
-    this.http.post('/api/Image', body)
-      .toPromise()
-      .then((res: any) => {
-        alert('File uploaded.');
-        this.modalRef.hide();
-        this.isClicked = false;
-      })
-      .catch((err: any) => {
-        console.log(err);
-        this.isClicked = false;
-      });
+      this.isClicked = true;
+
+      this.http.post('/api/Image', body)
+        .toPromise()
+        .then((res: any) => {
+          alert('File uploaded.');
+          this.modalRef.hide();
+          this.isClicked = false;
+        })
+        .catch((err: any) => {
+          console.log(err);
+          this.isClicked = false;
+        });
+    }
   }
 }
