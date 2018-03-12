@@ -1,0 +1,6 @@
+﻿<h1>Results</h1>
+<h4>Found {{results.length}} results</h4>
+<div *ngFor="let result of results">
+  <h5>{{result.imageName}} by {{result.userName}}</h5>
+  <a [href]="'/i/' + result.imageId"><img class="img-thumbnail images" [src]="'data:image/jpg;base64,' + result.imageObj"/></a>
+</div>

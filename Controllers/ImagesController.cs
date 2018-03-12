@@ -55,8 +55,9 @@ namespace FinalProject.Controllers
           return new JsonResult(new { results = images });
         }
       }
-      catch
+      catch (Exception e)
       {
+        string msg = e.Message;
         return null;
       }
     }

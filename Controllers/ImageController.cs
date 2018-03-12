@@ -37,12 +37,12 @@ namespace FinalProject.Controllers
 
             command.Connection = connection;
             command.CommandType = System.Data.CommandType.Text;
-            command.CommandText = "INSERT INTO dbo.Images (imageName, groupName, userName, description, imageUrl) VALUES(@imageName, @groupName, @userName, @description, @imageUrl)";
+            command.CommandText = "INSERT INTO dbo.Images (imageName, groupName, userName, description, imageObj) VALUES(@imageName, @groupName, @userName, @description, @imageObj)";
             command.Parameters.AddWithValue("@imageName", imageName);
             command.Parameters.AddWithValue("@groupName", groupName);
             command.Parameters.AddWithValue("@userName", userName);
             command.Parameters.AddWithValue("@description", description);
-            command.Parameters.AddWithValue("@imageUrl", imageUrl);
+            command.Parameters.AddWithValue("@imageObj", imageUrl);
 
             try
             {
@@ -73,7 +73,7 @@ namespace FinalProject.Controllers
     }
 
     [HttpGet]
-    public ActionResult GetImages(string imageName = "", string groupName = "", string userName = "")
+    public ActionResult GetImages(int imageId = -1, string imageName = "", string groupName = "", string userName = "")
     {
       try
       {
@@ -88,9 +88,9 @@ namespace FinalProject.Controllers
 
           string query = "SELECT * FROM Images";
 
-          if (imageName.Length > 0 || groupName.Length > 0 || userName.Length > 0)
+          if (imageId > -1 || imageName.Length > 0 || groupName.Length > 0 || userName.Length > 0)
           {
-            query += String.Format(" WHERE imageName LIKE '%{0}%' OR groupName LIKE '%{1}%' OR userName LIKE '%{2}%'", imageName, groupName, userName);
+            query += String.Format(" WHERE imageName LIKE '%{0}%' OR groupName LIKE '%{1}%' OR userName LIKE '%{2}%' OR imageId={3}", imageName, groupName, userName, imageId);
           }
 
 

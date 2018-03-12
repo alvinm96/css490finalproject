@@ -17,6 +17,10 @@ import { GroupsComponent } from './components/groups/groups.component';
 import { ImagesComponent } from './components/images/images.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { SearchComponent } from './components/search/search.component';
+import { ResultsComponent } from './components/results/results.component';
+import { ImageComponent } from './components/image/image.component';
+
+import { ResultsService } from './services/results.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,9 @@ import { SearchComponent } from './components/search/search.component';
     GroupsComponent,
     ImagesComponent,
     WelcomeComponent,
-    SearchComponent
+    SearchComponent,
+    ResultsComponent,
+    ImageComponent
   ],
   imports: [
     CommonModule,
@@ -46,10 +52,15 @@ import { SearchComponent } from './components/search/search.component';
       { path: 'u/:userId/images', component: ImagesComponent },
       { path: 'u/:userId/groups', component: GroupsComponent },
       { path: 'search', component: SearchComponent },
+      { path: 'results', component: ResultsComponent },
+      { path: 'i/:imageId', component: ImageComponent },
       { path: '**', redirectTo: 'home' }
     ]),
     ModalModule.forRoot(),
     Ng2Webstorage
+  ],
+  providers: [
+    ResultsService
   ]
 })
 export class AppModuleShared {
