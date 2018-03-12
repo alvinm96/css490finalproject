@@ -39,10 +39,9 @@ namespace FinalProject.Controllers
                 container.CreateIfNotExistsAsync();
 
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(body.ImageName);
-                //byte[] test = new byte[] { 1, 2, 3 };
-                using (var stream = new MemoryStream((Byte[])body.ImageObj)) {
-                    blockBlob.UploadFromStreamAsync(stream);
-                }
+                byte[] temp = Convert.FromBase64String(body.ImageObj);
+                blockBlob.UploadFromByteArrayAsync(temp,0, temp.Length);
+                
                 iUrl = blockBlob.Uri.AbsoluteUri;
             }
             catch (Exception e) { }
