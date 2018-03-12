@@ -14,6 +14,12 @@ namespace FinalProject
     {
         public string Client_ID { get; set; }
         public string Userpool_ID { get; set; }
+        public string RDS_Hostname { get; set; }
+        public string RDS_DB_Name { get; set; }
+        public int RDS_Port { get; set; }
+        public string RDS_Username { get; set; }
+        public string RDS_Password { get; set; }
+ 
     }
     
     public class Startup

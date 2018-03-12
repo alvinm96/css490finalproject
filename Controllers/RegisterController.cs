@@ -64,7 +64,7 @@ namespace FinalProject.Controllers
   }
 
   [Route("api/[controller]")]
-  public class LoginController
+  public class LoginController : Controller
   {
     private AmazonCognitoIdentityProviderClient _client = new AmazonCognitoIdentityProviderClient(RegionEndpoint.USWest2);
     public AWSConfig AWSConfig { get; }
@@ -104,7 +104,7 @@ namespace FinalProject.Controllers
   }
 
   [Route("api/[controller]")]
-  public class VerifyController
+  public class VerifyController : Controller
   {
     private AmazonCognitoIdentityProviderClient _client = new AmazonCognitoIdentityProviderClient(RegionEndpoint.USWest2);
     public AWSConfig AWSConfig { get; }
