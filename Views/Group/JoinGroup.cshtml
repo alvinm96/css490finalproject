@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = "JoinGroup";
+}
+<h2>JoinGroup</h2>
+@using (Html.BeginForm("JoinGroupResult", "Group"))
+{
+    <b>Group Name </b>
+    @Html.TextBox("GName", "")
+    <br />
+
+
+    <input type="submit" value="Join Group" />
+
+}
+<h3>@ViewBag.Result</h3>
