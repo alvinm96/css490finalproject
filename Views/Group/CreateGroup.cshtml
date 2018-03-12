@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "CreateGroup";
+}
+<h2>CreateGroup</h2>
+@using (Html.BeginForm("CreateGroupResult", "Group"))
+{
+    <b>Group Name </b>
+    @Html.TextBox("GName", "")
+    <br />
+    <b>Group Description</b>
+    @Html.TextBox("GDisc", "")
+    <br />
+
+    <input type="submit" value="Create Group" />
+
+}
+<h3>@ViewBag.Result</h3>
