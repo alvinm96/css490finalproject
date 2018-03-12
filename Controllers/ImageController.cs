@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using FinalProject.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System.IO;
 
 namespace FinalProject.Controllers
 {
@@ -21,6 +24,28 @@ namespace FinalProject.Controllers
     [HttpPost]
     public ActionResult PostImage([FromBody] Image body)
     {
+            string iUrl = "";
+            //Upload the file to Azure blob Storage
+            CloudStorageAccount storageAccount;
+            CloudBlobClient blobClient;
+            CloudBlobContainer container;
+            try
+            {
+                storageAccount = CloudStorageAccount.Parse(
+                    "DefaultEndpointsProtocol=https;AccountName=cs4b035210e496ex4e62xa99;" +
+                    "AccountKey=TfHQMBpzVdWaOY/4YpkOj1C1fkXqZbnBbvEwdrzx+H3x9uR7jF4DGtwGwaGG4HK4SYop03yyIpt15a2+sf9b6Q==;EndpointSuffix=core.windows.net");
+                blobClient = storageAccount.CreateCloudBlobClient();
+                container = blobClient.GetContainerReference("zdiwus6dmtjglkjgqkdh");
+                container.CreateIfNotExistsAsync();
+
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(body.ImageName);
+                //byte[] test = new byte[] { 1, 2, 3 };
+                using (var stream = new MemoryStream((Byte[])body.ImageObj)) {
+                    blockBlob.UploadFromStreamAsync(stream);
+                }
+                iUrl = blockBlob.Uri.AbsoluteUri;
+            }
+            catch (Exception e) { }
       try
       {
         SqlConnectionStringBuilder builder = Builder();
