@@ -37,7 +37,7 @@ namespace FinalProject.Controllers
             command.CommandType = System.Data.CommandType.Text;
             command.CommandText = "INSERT INTO UGroup (groupID, groupName, Description, numPosts) Values(@groupID, @groupName, @Description, @numPosts);";
             command.Parameters.AddWithValue("@GroupID", GenerateID()); // will throw an error if generateId happens to generate an existing id, consider using auto-increment in sql instead
-            command.Parameters.AddWithValue("@groupname", groupName);
+            command.Parameters.AddWithValue("@groupNname", groupName);
             command.Parameters.AddWithValue("@Description", groupDisc);
             command.Parameters.AddWithValue("@numPosts", 0);
 

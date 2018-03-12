@@ -15,6 +15,8 @@ import { CodeVerificationComponent } from './components/code-verification/code-v
 import { UserComponent } from './components/user/user.component';
 import { GroupsComponent } from './components/groups/groups.component';
 import { ImagesComponent } from './components/images/images.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -26,14 +28,16 @@ import { ImagesComponent } from './components/images/images.component';
     CodeVerificationComponent,
     UserComponent,
     GroupsComponent,
-    ImagesComponent
+    ImagesComponent,
+    WelcomeComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,
     HttpModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '', component: WelcomeComponent },
       { path: 'home', component: HomeComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'callback', component: CallbackComponent },
@@ -41,6 +45,7 @@ import { ImagesComponent } from './components/images/images.component';
       { path: 'u/:userId', component: UserComponent },
       { path: 'u/:userId/images', component: ImagesComponent },
       { path: 'u/:userId/groups', component: GroupsComponent },
+      { path: 'search', component: SearchComponent },
       { path: '**', redirectTo: 'home' }
     ]),
     ModalModule.forRoot(),

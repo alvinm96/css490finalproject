@@ -14,6 +14,8 @@ export class NavMenuComponent {
   name: string;
   modalRef: BsModalRef;
   userPage: string;
+  userImages: string;
+  userGroups: string;
   file: any;
   isClicked: boolean = false;
 
@@ -25,6 +27,8 @@ export class NavMenuComponent {
     this.isLoggedIn = this.sessionSt.retrieve("isLoggedIn");
     this.name = this.sessionSt.retrieve("username");
     this.userPage = '/u/' + this.name;
+    this.userImages = '/u/' + this.name + '/images';
+    this.userGroups = '/u/' + this.name + '/groups';
   }
 
   openModal(template: any) {
@@ -50,7 +54,7 @@ export class NavMenuComponent {
 
     this.isClicked = true;
 
-    this.http.post('/api/Images', body)
+    this.http.post('/api/Image', body)
       .toPromise()
       .then((res: any) => {
         alert('File uploaded.');

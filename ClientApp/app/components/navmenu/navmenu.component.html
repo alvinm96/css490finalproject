@@ -13,6 +13,7 @@
 
     <ul class="nav navbar-nav navbar-left" *ngIf="isLoggedIn">
       <li><button class="btn btn-group-lg btn-success" (click)="openModal(template)">Upload</button></li>
+      <li><button class="btn btn-group-lg btn-success" routerLink="search">Search</button></li>
     </ul>
 
 
@@ -20,11 +21,11 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello {{name}}! <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Your Images</a></li>
+          <li><a [routerLink]="userImages">Your Images</a></li>
           <li role="separator" class="divider"></li>
-          <li><a href="#">Your Groups</a></li>
+          <li><a [routerLink]="userGroups">Your Groups</a></li>
           <li role="separator" class="divider"></li>
-          <li><a routerLink="/u/alvinm96">Your Account</a></li>
+          <li><a [routerLink]="userPage">Your Account</a></li>
           <li role="separator" class="divider"></li>
           <li><a href="#">Sign Out</a></li>
         </ul>

@@ -17,12 +17,6 @@ namespace FinalProject.Controllers
   [Route("api/[controller]")]
   public class ImagesController : Controller
   {
-    //BaseDBController dbconn;
-    public ImagesController(IOptions<AWSConfig> awsConfig)
-    {
-      //dbconn = new BaseDBController(awsConfig);
-    }
-
     [HttpGet]
     public ActionResult GetImages()
     {
@@ -64,60 +58,6 @@ namespace FinalProject.Controllers
       catch
       {
         return null;
-      }
-    }
-
-    [HttpPost]
-    public ActionResult PostImage([FromBody] Image body)
-    {
-      try
-      {
-        SqlConnectionStringBuilder builder = Builder();
-
-        using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-        {
-          using (SqlCommand command = new SqlCommand())
-          {
-            string imageName = body.ImageName;
-            string groupName = body.GroupName;
-            string userName = body.UserName;
-            string description = body.Description;
-            object imageUrl = body.ImageObj;
-
-            command.Connection = connection;
-            command.CommandType = System.Data.CommandType.Text;
-            command.CommandText = "INSERT INTO dbo.Images (imageName, groupName, userName, description, imageUrl) VALUES(@imageName, @groupName, @userName, @description, @imageUrl)";
-            command.Parameters.AddWithValue("@imageName", imageName);
-            command.Parameters.AddWithValue("@groupName", groupName);
-            command.Parameters.AddWithValue("@userName", userName);
-            command.Parameters.AddWithValue("@description", description);
-            command.Parameters.AddWithValue("@imageUrl", imageUrl);
-
-            try
-            {
-              connection.Open();
-              int rowsAffected = command.ExecuteNonQuery();
-
-              return new CreatedResult("Images", imageName);
-            }
-            catch (SqlException e)
-            {
-
-              string msg = e.Message;
-              return new BadRequestResult();
-
-            }
-            finally
-            {
-              connection.Close();
-            }
-          }
-        }
-      }
-      catch (Exception e)
-      {
-        string msg = e.Message;
-        return new BadRequestResult();
       }
     }
 
