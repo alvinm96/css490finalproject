@@ -82,9 +82,8 @@ namespace FinalProject.Controllers
             string groupName = body.GroupName;
             string userName = body.UserName;
             string description = body.Description;
-            var imageUrl = body.ImageObj;
+            object imageUrl = body.ImageObj;
 
-           
             command.Connection = connection;
             command.CommandType = System.Data.CommandType.Text;
             command.CommandText = "INSERT INTO dbo.Images (imageName, groupName, userName, description, imageUrl) VALUES(@imageName, @groupName, @userName, @description, @imageUrl)";

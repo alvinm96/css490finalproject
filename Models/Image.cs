@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,9 +13,9 @@ namespace FinalProject.Models
     public string GroupName { get; set; }
     public string UserName { get; set; }
     public string Description { get; set; }
-    public string ImageObj { get; set; }
+    public object ImageObj { get; set; }
 
-    public Image(int imageId, string imageName, string groupName, string userName, string description, string image)
+    public Image(int imageId, string imageName, string groupName, string userName, string description, object image)
     {
       ImageId = imageId;
       ImageName = imageName;

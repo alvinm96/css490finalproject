@@ -36,13 +36,17 @@ export class NavMenuComponent {
   }
 
   upload(form: any) {
+    console.log(this.file[0]);
+
     let body = {
       imageName: form.value.name,
       groupName: 'test-group',
       userName: this.name,
       description: form.value.description,
-      imageObj: 'test'
+      imageObj: this.file[0] || ''
     };
+
+    console.log(body);
 
     this.isClicked = true;
 
