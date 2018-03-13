@@ -1,0 +1,29 @@
+
+@{
+    ViewData["Title"] = "HomePage";
+}
+
+
+<h2>HomePage</h2>
+
+<h3>This is the new homepage</h3>
+
+@using (Html.BeginForm("CreateGroup", "Group"))
+{
+    <input type="submit" value="Create Group" />
+}
+
+@using (Html.BeginForm("JoinGroup", "Group"))
+{
+    <input type="submit" value="Join Group" />
+}
+
+@using (Html.BeginForm("JoinGroup", "Group"))
+{
+    <input type="submit" value="Create Post" />
+}
+
+@using (Html.BeginForm("Queries", "Query"))
+{
+    <input type="submit" value="View Queries" />
+}
