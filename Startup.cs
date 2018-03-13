@@ -12,6 +12,8 @@ namespace FinalProject
 {
     public class AWSConfig
     {
+        public string AWS_Access_Key_Id { get; set; }
+        public string AWS_Secret_Access_Key { get; set; }
         public string Client_ID { get; set; }
         public string Userpool_ID { get; set; }
         public string RDS_Hostname { get; set; }

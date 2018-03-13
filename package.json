@@ -60,6 +60,7 @@
     "zone.js": "0.8.12"
   },
   "dependencies": {
+    "enhanced-resolve": "^3.3.0",
     "ngx-bootstrap": "^2.0.2",
     "ngx-webstorage": "^2.0.1"
   }

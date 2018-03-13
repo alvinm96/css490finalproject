@@ -54,7 +54,7 @@ import { ResultsService } from './services/results.service';
       { path: 'search', component: SearchComponent },
       { path: 'results', component: ResultsComponent },
       { path: 'i/:imageId', component: ImageComponent },
-      { path: '**', redirectTo: 'home' }
+      { path: '**', redirectTo: '' }
     ]),
     ModalModule.forRoot(),
     Ng2Webstorage

@@ -24,6 +24,7 @@ namespace FinalProject.Controllers
     [HttpPost]
     public ActionResult PostImage([FromBody] Image body)
     {
+      /*
             string iUrl = "";
             //Upload the file to Azure blob Storage
             CloudStorageAccount storageAccount;
@@ -44,7 +45,7 @@ namespace FinalProject.Controllers
                 
                 iUrl = blockBlob.Uri.AbsoluteUri;
             }
-            catch (Exception e) { }
+            catch (Exception e) { }*/
       try
       {
         SqlConnectionStringBuilder builder = Builder();

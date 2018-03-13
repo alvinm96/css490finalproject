@@ -31,7 +31,7 @@ namespace FinalProject.Controllers
     [HttpPost]
     public async Task<JsonResult> Register([FromBody] UserIdentity body)
     {
-      using (var provider = new Amazon.CognitoIdentityProvider.AmazonCognitoIdentityProviderClient(RegionEndpoint.USWest2))
+      using (var provider = new Amazon.CognitoIdentityProvider.AmazonCognitoIdentityProviderClient(AWSConfig.AWS_Access_Key_Id, AWSConfig.AWS_Secret_Access_Key, RegionEndpoint.USWest2))
       {
         try
         {
@@ -66,12 +66,13 @@ namespace FinalProject.Controllers
   [Route("api/[controller]")]
   public class LoginController : Controller
   {
-    private AmazonCognitoIdentityProviderClient _client = new AmazonCognitoIdentityProviderClient(RegionEndpoint.USWest2);
+    private AmazonCognitoIdentityProviderClient _client;
     public AWSConfig AWSConfig { get; }
 
     public LoginController(IOptions<AWSConfig> awsConfig)
     {
       AWSConfig = awsConfig.Value;
+      _client = new AmazonCognitoIdentityProviderClient(AWSConfig.AWS_Access_Key_Id, AWSConfig.AWS_Secret_Access_Key, RegionEndpoint.USWest2);
     }
 
     [HttpPost]
@@ -106,16 +107,56 @@ namespace FinalProject.Controllers
   [Route("api/[controller]")]
   public class VerifyController : Controller
   {
-    private AmazonCognitoIdentityProviderClient _client = new AmazonCognitoIdentityProviderClient(RegionEndpoint.USWest2);
+    private AmazonCognitoIdentityProviderClient _client;
     public AWSConfig AWSConfig { get; }
 
     public VerifyController(IOptions<AWSConfig> awsConfig)
     {
       AWSConfig = awsConfig.Value;
+      _client = new AmazonCognitoIdentityProviderClient(AWSConfig.AWS_Access_Key_Id, AWSConfig.AWS_Secret_Access_Key, RegionEndpoint.USWest2);
     }
 
     [HttpPost]
     public async Task<JsonResult> Verify([FromBody] UserIdentity body)
+    {
+      try
+      {
+        Amazon.CognitoIdentityProvider.Model.ConfirmSignUpRequest confirmReq =
+          new ConfirmSignUpRequest()
+          {
+            Username = body.Username,
+            ClientId = AWSConfig.Client_ID,
+            ConfirmationCode = body.Code
+          };
+
+        var result = await _client.ConfirmSignUpAsync(confirmReq);
+
+        return new JsonResult(new { response = result.ToString() });
+      }
+      catch (Exception e)
+      {
+        return new JsonResult(new { response = e.Message })
+        {
+          StatusCode = 400
+        };
+      }
+    }
+  }
+
+  [Route("api/[controller]")]
+  public class LogoutController : Controller
+  {
+    private AmazonCognitoIdentityProviderClient _client;
+    public AWSConfig AWSConfig { get; }
+
+    public LogoutController(IOptions<AWSConfig> awsConfig)
+    {
+      AWSConfig = awsConfig.Value;
+      _client = new AmazonCognitoIdentityProviderClient(AWSConfig.AWS_Access_Key_Id, AWSConfig.AWS_Secret_Access_Key, RegionEndpoint.USWest2);
+    }
+
+    [HttpPost]
+    public async Task<JsonResult> Logout([FromBody] UserIdentity body)
     {
       try
       {
