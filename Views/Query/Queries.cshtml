@@ -10,13 +10,7 @@
     <input type="submit" value="Get Groups" />
 }
 
-@using (Html.BeginForm("GetPosts", "Query"))
-{
-    <b>Group Name </b>
-    @Html.TextBox("GName", "")
-    <br />
-    <input type="submit" value="Get Posts" />
-}
+
 
 @foreach (string str in ViewBag.Results)
 {
