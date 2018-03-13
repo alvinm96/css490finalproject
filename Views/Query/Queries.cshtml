@@ -1,0 +1,26 @@
+
+@{
+    ViewData["Title"] = "Queries";
+}
+
+<h2>Queries</h2>
+
+@using (Html.BeginForm("GetGroups", "Query"))
+{
+    <input type="submit" value="Get Groups" />
+}
+
+@using (Html.BeginForm("GetPosts", "Query"))
+{
+    <b>Group Name </b>
+    @Html.TextBox("GName", "")
+    <br />
+    <input type="submit" value="Get Posts" />
+}
+
+@foreach (string str in ViewBag.Results)
+{
+    @Html.Label(str)
+    <br />
+
+}
