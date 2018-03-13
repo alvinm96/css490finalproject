@@ -9,7 +9,7 @@ using System.Text;
 
 namespace FinalProject.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
     public class GroupController : Controller
     {
 
