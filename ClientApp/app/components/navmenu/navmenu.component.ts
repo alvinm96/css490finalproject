@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { SessionStorageService } from 'ngx-webstorage';
@@ -22,11 +23,13 @@ export class NavMenuComponent {
 
   constructor(private modalService: BsModalService,
               private sessionSt: SessionStorageService,
-              private http: Http) { }
+              private http: Http,
+              private router: Router) { }
 
   ngOnInit() {
-    this.isLoggedIn = this.sessionSt.retrieve("isLoggedIn");
-    this.name = this.sessionSt.retrieve("username");
+    if (this.name = this.sessionSt.retrieve("username")) {
+      this.isLoggedIn = true;
+    }
     this.userPage = '/u/' + this.name;
     this.userImages = '/u/' + this.name + '/images';
     this.userGroups = '/u/' + this.name + '/groups';
@@ -40,6 +43,24 @@ export class NavMenuComponent {
     this.file = input.target.files;
   }
 
+  signOut() {
+    let body = {
+      userName: this.name
+    };
+
+    this.http.post('/api/Logout', body)
+      .toPromise()
+      .then((res) => {
+        this.isLoggedIn = false;
+        this.sessionSt.clear('username');
+        this.router.navigateByUrl('/');
+        
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   upload(form: any) {
     let reader = new FileReader();
 
@@ -48,6 +69,10 @@ export class NavMenuComponent {
     reader.onload = () => {
       var byteArray = new Uint8Array(reader.result);
 
+      if (byteArray.length > 65000) {
+        return alert('File size too big! Has to be less than 65KB');
+      }
+
       let body = {
         imageName: form.value.name,
         groupName: 'test-group',
@@ -55,7 +80,6 @@ export class NavMenuComponent {
         description: form.value.description,
         imageObj: btoa(String.fromCharCode.apply(null, byteArray))
       };
-      console.log(byteArray);
 
       this.isClicked = true;
 

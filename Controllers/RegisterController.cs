@@ -160,15 +160,14 @@ namespace FinalProject.Controllers
     {
       try
       {
-        Amazon.CognitoIdentityProvider.Model.ConfirmSignUpRequest confirmReq =
-          new ConfirmSignUpRequest()
+        Amazon.CognitoIdentityProvider.Model.AdminUserGlobalSignOutRequest confirmReq =
+          new AdminUserGlobalSignOutRequest()
           {
+            UserPoolId = AWSConfig.Userpool_ID,
             Username = body.Username,
-            ClientId = AWSConfig.Client_ID,
-            ConfirmationCode = body.Code
           };
 
-        var result = await _client.ConfirmSignUpAsync(confirmReq);
+        var result = await _client.AdminUserGlobalSignOutAsync(confirmReq);
 
         return new JsonResult(new { response = result.ToString() });
       }

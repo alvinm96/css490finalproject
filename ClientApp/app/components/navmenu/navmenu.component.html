@@ -27,7 +27,7 @@
           <li role="separator" class="divider"></li>
           <li><a [routerLink]="userPage">Your Account</a></li>
           <li role="separator" class="divider"></li>
-          <li><a href="#">Sign Out</a></li>
+          <li><a (click)="signOut()">Sign Out</a></li>
         </ul>
       </li>
     </ul>
@@ -74,7 +74,7 @@
       <div class="form-group row">
         <label for="file" class="col-sm-2 col-form-label">File</label>
         <div class="col-sm-10">
-          <input id="file" name="file" (change)="fileUpload($event)" class="form-control" type="file" ngModel />
+          <input id="file" name="file" accept="image/jpeg" (change)="fileUpload($event)" class="form-control" type="file" ngModel />
         </div>
       </div>
       <button class="btn btn-primary" [disabled]="isClicked">Upload</button>
