@@ -9,6 +9,12 @@ namespace FinalProject.Controllers
 {
     public class HomeController : Controller
     {
+        
+        public ActionResult HomePage()
+        {
+            return View();
+        }
+    
         public IActionResult Index()
         {
             return View();
