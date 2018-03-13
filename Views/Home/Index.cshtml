@@ -8,3 +8,9 @@
 @section scripts {
     <script src="~/dist/main-client.js" asp-append-version="true"></script>
 }
+
+@using (Html.BeginForm("HomePage", "Home"))
+{
+    <input type="submit" value="HomePage" />
+
+}
