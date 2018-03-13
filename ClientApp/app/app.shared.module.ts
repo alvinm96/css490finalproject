@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { Ng2Webstorage } from 'ngx-webstorage';
+import { CarouselModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
@@ -57,7 +58,8 @@ import { ResultsService } from './services/results.service';
       { path: '**', redirectTo: '' }
     ]),
     ModalModule.forRoot(),
-    Ng2Webstorage
+    Ng2Webstorage,
+    CarouselModule.forRoot()
   ],
   providers: [
     ResultsService

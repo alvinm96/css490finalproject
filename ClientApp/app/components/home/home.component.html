@@ -1,7 +1,11 @@
 <h1>Home</h1>
 <div>
   <h2>Recent Posts</h2>
-
+    <carousel>
+      <slide *ngFor="let post of recentPosts">
+        <a [href]="'/i/' + post.imageId"><img class="img-fluid center-block" [src]="'data:image/jpg;base64,' + post.imageObj" style="display: block; height: 50vh; text-align: center;"/></a>
+      </slide>
+    </carousel>
 </div>
 <div>
   <h2>Your Groups</h2>
