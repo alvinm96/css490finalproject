@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,7 +15,8 @@ namespace FinalProject.Controllers
 
     public ActionResult CreateGroup()
     {
-      return View();
+           
+            return View();
     }
 
     [HttpPost]
@@ -37,7 +38,7 @@ namespace FinalProject.Controllers
             command.CommandType = System.Data.CommandType.Text;
             command.CommandText = "INSERT INTO UGroup (groupID, groupName, Description, numPosts) Values(@groupID, @groupName, @Description, @numPosts);";
             command.Parameters.AddWithValue("@GroupID", GenerateID()); // will throw an error if generateId happens to generate an existing id, consider using auto-increment in sql instead
-            command.Parameters.AddWithValue("@groupNname", groupName);
+            command.Parameters.AddWithValue("@groupName", groupName);
             command.Parameters.AddWithValue("@Description", groupDisc);
             command.Parameters.AddWithValue("@numPosts", 0);
 
@@ -47,9 +48,9 @@ namespace FinalProject.Controllers
               int rowsAffected = command.ExecuteNonQuery();
               ViewBag.Result = "Successfully created group " + groupName;
             }
-            catch (SqlException)
+            catch (SqlException e)
             {
-              ViewBag.Result = "Group Already Exists";
+              ViewBag.Result = "";
             }
             finally
             {
@@ -60,14 +61,14 @@ namespace FinalProject.Controllers
       }
       catch
       {
-
-      }
+                ViewBag.Result = "";
+            }
       return View("CreateGroup");
     }
 
     public ActionResult JoinGroup()
     {
-      return View();
+      return View("JoinGroup");
     }
 
     public ActionResult JoinGroupResult()
